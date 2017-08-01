@@ -6,9 +6,8 @@ Isaac Julien
 
 import apache_beam as beam
 
-import apache_beam.io.filesystems as abfs
-
-#import apache_beam.io.gcp.gcsfilesystem.GCSFileSystem as gcsio
+#import apache_beam.io.filesystems as abfs
+import apache_beam.io.gcp.gcsfilesystem.GCSFileSystem as gcsio
 
 import argparse
 
@@ -27,7 +26,7 @@ if __name__ == '__main__':
    output_prefix = options.outputdir + "test"
 
    (p
-      | 'GetFilenames' >> abfs.match(input)
+      | 'GetFilenames' >> gcsio.match(input)
       | 'write' >> beam.io.WriteToText(output_prefix)
    )
 
