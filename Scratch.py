@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
 
    (p
-      | 'read' >> tfrecordio.ReadFromTFRecord(input)
+      | 'read' >> tfrecordio.ReadFromTFRecord("gs://testinput/input/*")
       | 'write' >> tfrecordio.WriteToTFRecord(output_prefix)
    )
 
