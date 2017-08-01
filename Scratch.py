@@ -24,15 +24,15 @@ if __name__ == '__main__':
 
    p = beam.Pipeline(argv=pipeline_args)
 
-   #input = '{0}*tfrecord'.format(options.inputdir)
-   input = '{0}*'.format(options.inputdir)
+   input = '{0}*tfrecord'.format(options.inputdir)
+   #input = '{0}*'.format(options.inputdir)
 
    output_prefix = options.outputdir + "test"
 
 
    (p
-      | 'GetFilenames' >> tfrecordio.ReadFromTFRecord(input)
-      | 'write' >> tfrecordio.WriteToTFRecord(output_prefix)
+      | 'GetFilenames' >> tfrecordio.ReadFromTFRecord("gs://testinput/input/")
+      | 'write' >> tfrecordio.WriteToTFRecord('gs://processedframeleveloutput/outputs/test')
    )
 
    p.run()
