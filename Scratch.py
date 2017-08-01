@@ -5,8 +5,6 @@ Isaac Julien
 """
 
 import apache_beam as beam
-
-#import org.apache.beam.sdk.io.TFRecordIO as tfrecordio
 import apache_beam.io.tfrecordio as tfrecordio
 
 import argparse
@@ -22,14 +20,17 @@ if __name__ == '__main__':
 
    p = beam.Pipeline(argv=pipeline_args)
 
-   input = '{0}*tfrecord'.format(options.inputdir)
-
+   input_pattern = '{0}*tfrecord'.format(options.inputdir)
    output_prefix = options.outputdir + "test"
 
 
    (p
-      | 'read' >> tfrecordio.ReadFromTFRecord("gs://testinput/input/*")
+      | 'read' >> tfrecordio.ReadFromTFRecord(input_pattern)
       | 'write' >> tfrecordio.WriteToTFRecord(output_prefix)
    )
 
    p.run()
+
+
+
+
