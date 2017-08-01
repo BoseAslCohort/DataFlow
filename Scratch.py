@@ -28,10 +28,21 @@ if __name__ == '__main__':
 
    output_prefix = options.outputdir + "test"
 
+   """
    (p
       | 'GetFilenames' >> beam.io.Read(input)
       | 'ProduceSymbol' >> beam.Map(lambda x: "hi")
       | 'write' >> beam.io.WriteToText(output_prefix)
    )
+   """
+
+   (p
+      | beam.Create([
+         'To be, or not to be: that is the question: ',
+         'Whether tis nobler in the mind to suffer ',
+         'The slings and arrows of outrageous fortune, ',
+         'Or to take arms against a sea of troubles, '])
+      | 'write' >> beam.io.WriteToText(output_prefix)
+    )
 
    p.run()
