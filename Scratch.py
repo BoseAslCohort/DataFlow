@@ -5,13 +5,14 @@ Isaac Julien
 """
 
 import apache_beam as beam
-import apache_beam.io.gcp.gcsfilesystem.GCSFileSystem as gcsio
+
+#import apache_beam.io.gcp.gcsfilesystem.GCSFileSystem as gcsio
 
 import argparse
 
 if __name__ == '__main__':
 
-   parser = argparse.ArgumentParser(description='')
+   parser = argparse.ArgumentParser(description='DataFlow for Video-Level data augmentation')
 
    parser.add_argument('--inputdir', default='gs://youtube8m-ml-us-east1/1/frame_level/train/', help='Input directory')
    parser.add_argument('--outputdir', default='gs://processedframeleveloutput/outputs/', help='Output directory')
@@ -24,7 +25,7 @@ if __name__ == '__main__':
    output_prefix = options.outputdir + "test"
 
    (p
-      | 'GetFilenames' >> gcsio.match(input)
+      | 'GetFilenames' >> beam.io.match(input) #gcsio.match(input)
       | 'write' >> beam.io.WriteToText(output_prefix)
    )
 
