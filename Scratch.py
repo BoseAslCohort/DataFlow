@@ -27,8 +27,8 @@ if __name__ == '__main__':
    output_prefix = options.outputdir + "test"
 
    (p
-      | 'GetFilenames' >> beam.io.match(input)
-      | 'write' >> abfs.WriteToText(output_prefix)
+      | 'GetFilenames' >> abfs.match(input)
+      | 'write' >> beam.io.WriteToText(output_prefix)
    )
 
    p.run()
