@@ -5,6 +5,7 @@ Isaac Julien
 """
 
 import apache_beam as beam
+import apache_beam.io.filesystem.FileSystem as abfs
 
 #import apache_beam.io.gcp.gcsfilesystem.GCSFileSystem as gcsio
 
@@ -26,7 +27,7 @@ if __name__ == '__main__':
 
    (p
       | 'GetFilenames' >> beam.io.match(input)
-      | 'write' >> beam.io.WriteToText(output_prefix)
+      | 'write' >> abfs.WriteToText(output_prefix)
    )
 
    p.run()
