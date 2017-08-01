@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
    p = beam.Pipeline(argv=pipeline_args)
 
-   input = '{0}*.tfrecord'.format(options.input)
+   input = '{0}*.tfrecord'.format(options.inputdir)
    output_prefix = options.outputdir + "test"
 
    (p
