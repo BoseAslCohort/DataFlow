@@ -5,7 +5,8 @@ Isaac Julien
 """
 
 import apache_beam as beam
-import apache_beam.io.filesystem.FileSystem as abfs
+
+import apache_beam.io.filesystems as abfs
 
 #import apache_beam.io.gcp.gcsfilesystem.GCSFileSystem as gcsio
 
