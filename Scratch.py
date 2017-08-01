@@ -6,8 +6,8 @@ Isaac Julien
 
 import apache_beam as beam
 
-import org.apache.beam.sdk.io.TFRecordIO as tfrecordio
-#import apache_beam.io.tfrecordio as tfrecordio
+#import org.apache.beam.sdk.io.TFRecordIO as tfrecordio
+import apache_beam.io.tfrecordio as tfrecordio
 
 import argparse
 
@@ -31,8 +31,8 @@ if __name__ == '__main__':
 
 
    (p
-      | 'GetFilenames' >> tfrecordio.Read(input)
-      | 'write' >> tfrecordio.Write(output_prefix)
+      | 'GetFilenames' >> tfrecordio.ReadFromTFRecord(input)
+      | 'write' >> tfrecordio.WriteToTFRecord(output_prefix)
    )
 
    p.run()
