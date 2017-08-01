@@ -27,7 +27,7 @@ if __name__ == '__main__':
    output_prefix = options.outputdir + "test"
 
    (p
-      | 'GetFilenames' >> tfrecordio.Read(input)
+      | 'GetFilenames' >> beam.io.Read(input)
       | 'ProduceSymbol' >> beam.Map(lambda x: "hi")
       | 'write' >> beam.io.WriteToText(output_prefix)
    )
