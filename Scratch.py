@@ -28,6 +28,7 @@ if __name__ == '__main__':
 
    (p
       | 'GetFilenames' >> tfrecordio.Read(input)
+      | 'ProduceSymbol' >> beam.Map(lambda x: "hi")
       | 'write' >> beam.io.WriteToText(output_prefix)
    )
 
