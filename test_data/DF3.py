@@ -3,7 +3,7 @@
 """
 
 PROJECT = "qwiklabs-gcp-e194c811cb72eed2"
-BUCKET = "gs://processedframeleveloutput"
+BUCKET = "gs://isaacoutputfinal"
 
 !python DataFlow.py \
 --project $PROJECT \
@@ -11,7 +11,10 @@ BUCKET = "gs://processedframeleveloutput"
 --runner DataflowRunner \
 --staging_location $BUCKET/staging \
 --temp_location $BUCKET/temp \
---zone='us-east4-a'
+--zone='us-east4-a' \
+--num_workers=468 \
+--disk_size_gb=50
+
 
 
 Isaac Julien
@@ -152,11 +155,11 @@ if __name__ == '__main__':
     p = beam.Pipeline(argv=sys.argv)
 
     (p
-     | 'read' >> beam.io.tfrecordio.ReadFromTFRecord("gs://youtube8m-ml-us-east1/1/video_level/train/*.tfrecord")
+     | 'read' >> beam.io.tfrecordio.ReadFromTFRecord("gs://youtube8m-ml-us-east1/1/frame_level/train/train*.tfrecord")
      # | 'read' >> beam.io.tfrecordio.ReadFromTFRecord("gs://testinput/input/")
      | 'process' >> beam.ParDo(Process())
      | 'process2' >> beam.ParDo(Process2())
-     | 'write' >> beam.io.tfrecordio.WriteToTFRecord("gs://processedframeleveloutput/train")
+     | 'write' >> beam.io.tfrecordio.WriteToTFRecord("gs://isaacoutputfinal/train")
      )
 
     p.run()
